@@ -1,3 +1,4 @@
+//knapsack with duplicate items
 class Solution{
 public:
     int knapSack(int N, int W, int val[], int wt[])
@@ -18,3 +19,4 @@ public:
         
     }
     };
+  
