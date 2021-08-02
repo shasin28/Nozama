@@ -1,3 +1,5 @@
+// using longest palindromic subsequence concept
+//another approach: take another string--as reverse of given string---find longest common subsequence
 int kPalindrome(string s, int n, int k)
     {
          int dp[n][n];
