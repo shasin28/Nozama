@@ -1,0 +1,32 @@
+ //gfg---use of unordered map was giving TLE
+ int longestUniqueSubsttr(string S){
+        
+//unordered_map<char,int>m;
+        int res=1;
+        int bg=0,en=0;
+        int m[256];
+        memset(m,0,sizeof(m));
+        while(en<S.size())
+        {
+            if(m[S[en]]==0)
+            {
+                res=max(res,en-bg+1);
+                m[S[en]]=en+1;
+            }
+            else
+            {
+                res=max(res,en-bg);
+                while(bg<m[S[en]])
+                {
+                    m[S[bg]]=0;
+                    bg++;
+                }
+            
+                m[S[en]]=en+1;
+            }
+            en++;
+        }
+        return res;
+        
+            
+}
