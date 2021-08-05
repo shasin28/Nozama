@@ -1,0 +1,41 @@
+void reorderList(Node* head) {
+    Node *slow=head,*fast=head;
+    while(fast&&fast->next)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+  //  slow->next=NULL;
+    Node *hd2=slow->next,*nxt,*prev=NULL,*curr;
+    slow->next=NULL;
+    
+    
+    curr=hd2;
+    while(curr)
+    {
+        nxt=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=nxt;
+    }
+    hd2=prev;
+  /*  while(prev)
+    {
+        cout<<prev->data<<"\n";
+        prev=prev->next;
+    }*/
+    curr=head;
+    while(curr&&hd2)
+    {
+        nxt=curr->next;
+        curr->next=hd2;
+        hd2=hd2->next;
+        curr=curr->next;
+        curr->next=nxt;
+        curr=curr->next;
+        
+       // hd2=hd2->next;
+    }
+    return;
+    
+}
