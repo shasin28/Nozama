@@ -1,0 +1,28 @@
+ int maxP(Node* root, int & res)
+    {
+        if(!root)
+        return 0;
+        if(!root->left&&!root->right)
+        return root->data;
+        int lmax=maxP(root->left,res);
+        int rmax=maxP(root->right,res);
+         if(root->right&&root->left)
+        {
+            res=max(res,lmax+rmax+root->data);
+            return max(lmax,rmax)+root->data;
+            
+        }
+           
+            return (root->left?lmax:rmax)+root->data;
+        
+    }
+    int maxPathSum(Node* root)
+    {
+        
+        int res=INT_MIN;
+        int val=maxP(root,res);
+//cout<<val<<" "<<res<<'\n';
+        if(res==INT_MIN)
+        return val;
+        return res;
+    }
