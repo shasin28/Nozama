@@ -1,0 +1,99 @@
+// Initial function template for C++
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Alphabet size (# of symbols)
+#define ALPHABET_SIZE (26)
+
+// Converts key current character into index
+// use only 'a' through 'z' and lower case
+#define CHAR_TO_INDEX(c) ((int)c - (int)'a')
+
+// trie node
+class TrieNode {
+	public:
+    TrieNode *children[ALPHABET_SIZE];
+
+    bool isLeaf;
+    TrieNode()
+    {
+    	isLeaf=false;
+    	for(int i=0;i<26;i++)
+    	{
+    		children[i]=NULL;
+    	}
+    }
+        void insert(  string key)
+{
+    TrieNode *tem=this;
+    for(int i=0;i<key.size();i++)
+    {
+        int idx=key[i]-'a';
+        if(!tem->children[idx])
+        {
+            tem->children[idx]=new TrieNode();
+          
+        }
+          tem=tem->children[idx];
+    }
+    tem->isLeaf=true;
+}
+
+//Function to use TRIE data structure and search the given string.
+bool search(string key) 
+{
+    // code here
+     TrieNode *tem=this;
+    for(int i=0;i<key.size();i++)
+    {
+        int idx=key[i]-'a';
+        if(!tem->children[idx])
+        {
+            return false;
+          
+        }
+          tem=tem->children[idx];
+    }
+    return tem->isLeaf;
+}
+  };
+
+
+    // Initial function template for C++
+
+int main() {
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+    int t;
+    cin >> t;
+    while (t--) {
+        // Input keys (use only 'a' through 'z' and lower case)
+        int n;
+        cin >> n;
+        string keys[n];
+
+        for (int i = 0; i < n; i++) {
+            cin >> keys[i];
+        }
+
+        TrieNode *root =new TrieNode();
+        // Construct trie
+        for (int i = 0; i < n; i++) root->insert(keys[i]);
+
+        string abc;
+
+        cin >> abc;
+        // Search for different keys
+
+        if (root->search(abc))
+            cout << "1\n";
+        else
+            cout << "0\n";
+        // char ex;
+        // cin >> ex;
+        // cout << ex << "\n";
+    }
+    return 0;
+}
