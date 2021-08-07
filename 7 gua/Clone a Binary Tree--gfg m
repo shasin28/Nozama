@@ -1,0 +1,38 @@
+class Solution{
+  public:
+    /* The function should clone the passed tree and return 
+       root of the cloned*/
+       void construct(Node* root,unordered_map<Node*,Node*>&m)
+       {
+           if(!root)
+           return;
+           if(root->left)
+           m[root]->left=m[root->left];
+           if(root->right)
+            m[root]->right=m[root->right];
+            if(root->random)
+             m[root]->random=m[root->random];
+            
+            construct(root->left,m);
+            construct(root->right,m);
+            return;
+           
+       }
+    void preorder_(Node* root,unordered_map<Node*,Node*>&m)
+    {
+        if(!root)
+        return;
+        Node *temp=new Node(root->data);
+        m[root]=temp;
+        preorder_(root->left,m);
+        preorder_(root->right,m);
+    }
+       
+    Node* cloneTree(Node* tree)
+    {
+       unordered_map<Node*,Node*>m;
+       preorder_(tree,m);
+       construct(tree,m);
+       return m[tree];
+    }
+};
