@@ -1,0 +1,34 @@
+class Solution
+{
+  public:
+    //Function to convert binary tree into circular doubly linked list
+    Node* add(Node* lt,Node *rt)
+    {
+        if(!lt)
+        return rt;
+        if(!rt)
+        return lt;
+        Node* lll=lt->left;
+        Node* rrr=rt->left;
+         lll->right = rt;
+    rt->left = lll;
+   lt->left = rrr;
+    rrr->right = lt;
+  
+    return lt;
+    }
+    Node* convert(Node*root)
+    {
+        if(!root)
+        return root;
+        Node* lft=convert(root->left);
+        Node* rit=convert(root->right);
+        root->left=root->right=root;
+        return add(add(lft,root),rit);
+        
+    }
+    Node *bTreeToCList(Node *root)
+    {
+    Node* head=convert(root);
+    }
+};
