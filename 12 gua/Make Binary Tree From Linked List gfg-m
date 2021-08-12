@@ -1,0 +1,21 @@
+void convert(Node *head, TreeNode *&root) {
+    
+    queue<TreeNode*>q;
+    root=new TreeNode(head->data);
+    q.push(root);
+    Node *headd=head;
+    headd=headd->next;
+    while(headd)
+    {
+        q.front()->left=new TreeNode(headd->data);
+        headd=headd->next;
+        q.push(q.front()->left);
+        if(!headd)
+        break;
+        q.front()->right=new TreeNode(headd->data);
+        q.push(q.front()->right);
+        headd=headd->next;
+        q.pop();
+    }
+     
+}
