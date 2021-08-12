@@ -1,0 +1,11 @@
+ //Function to return the maximum sum of non-adjacent nodes.
+    int getMaxSum(Node *root) 
+    {
+        if(!root)
+        return 0;
+        int ll=getMaxSum(root->left);
+        int rr=getMaxSum(root->right);
+        int gll=(root->left)?getMaxSum(root->left->left)+getMaxSum(root->left->right):0;
+        int grr=(root->right)?getMaxSum(root->right->left)+getMaxSum(root->right->right):0;
+        return max(root->data+gll+grr,ll+rr);
+    }
