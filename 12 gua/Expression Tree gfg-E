@@ -1,0 +1,23 @@
+class Solution{
+  public:
+    /*You are required to complete below method */
+    int evalTree(node* root) {
+        if(root==NULL)
+        return 0;
+        int ll=evalTree(root->left);
+        int rr=evalTree(root->right);
+         int val;
+        if(root->data=="*")
+            val=ll*rr;
+        else if(root->data=="/")
+        val=ll/rr;
+        else if(root->data=="+")
+        val=ll+rr;
+        else if(root->data=="-")
+        val=ll-rr;
+        else
+        val=stoi(root->data);
+        root->data=std::to_string(val);
+        return val;
+    }
+};
