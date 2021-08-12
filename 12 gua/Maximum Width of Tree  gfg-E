@@ -1,0 +1,28 @@
+class Solution {
+  public:
+    // Function to get the maximum width of a binary tree.
+    int getMaxWidth(Node* root) {
+
+        int cc=0;
+        if(!root)
+        return cc;
+        queue<Node*>q;
+        q.push(root);
+        while(!q.empty())
+        {
+            cc=max(cc,(int)q.size());
+            int k=q.size();
+            while(k--)
+            {
+                Node* temp=q.front();
+                q.pop();
+                if(temp->left)
+                q.push(temp->left);
+                if(temp->right)
+                q.push(temp->right);
+            }
+        }
+        return cc;
+    }
+};
+
