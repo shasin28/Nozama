@@ -1,0 +1,43 @@
+//idea: tree to cdll
+class Solution
+{
+    public: 
+    //Function to convert binary tree to doubly linked list and return it.
+    Node* add(Node*lt,Node*rt)
+    {
+        if(!lt)
+        return rt;
+        if(!rt)
+        return lt;
+
+        Node* ll=lt->left;
+        Node* rr=rt->left;
+        ll->right=rt;
+        rt->left=ll;
+        rr->right=lt;
+        lt->left=rr;
+        return lt;
+        
+        
+    }
+    Node* inorder(Node* root)
+    {
+        if(!root)
+        return root;
+        Node* lt=inorder(root->left);
+        Node* rt=inorder(root->right);
+        root->left=root->right=root;
+         
+        return add(add(lt,root),rt);
+        
+        
+    }
+    Node * bToDLL(Node *root)
+    {
+        Node *ans=inorder(root);
+        Node* tail=ans->left;
+        ans->left=NULL;
+        tail->right=NULL;
+        return ans;
+    }
+};
