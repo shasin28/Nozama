@@ -1,0 +1,20 @@
+void pre(Node* root, int dist,int k,vector<int>&result)
+{
+    if(!root)
+    return;
+    if(dist==k)
+    {
+    result.push_back(root->data);
+    return;
+    }
+     pre(root->left,dist+1,k,result);
+     pre(root->right,1+dist,k,result);
+}
+vector<int> Kdistance(struct Node *root, int k)
+{
+  vector<int> result;
+  pre(root,0,k,result);
+ // sort(result.begin(),result.end());
+  //sort
+  return result;
+}
