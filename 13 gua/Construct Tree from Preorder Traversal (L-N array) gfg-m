@@ -1,0 +1,21 @@
+struct Node *constructTreeUtil(int n, int pre[], char preLN[],int &idx)
+{
+    
+    if(idx>=n)
+    return NULL;
+    Node* root=new Node(pre[idx]);
+   if(preLN[idx++]=='N')
+   {
+       root->left=constructTreeUtil(n,pre,preLN,idx);
+       root->right=constructTreeUtil(n,pre,preLN,idx);
+      
+   }
+    return root;
+    
+}
+
+struct Node *constructTree(int n, int pre[], char preLN[])
+{
+    int idx=0;
+    return constructTreeUtil(n,pre,preLN,idx);
+}
