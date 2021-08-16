@@ -1,0 +1,13 @@
+	long long maxProduct(int *arr, int n) {
+	    long long maxp=arr[0],minp=arr[0],ans=arr[0];
+	    for(int i=1;i<n;i++)
+	    {
+	        long long mm=maxp;
+	        maxp=max(maxp*(long long)arr[i],max((long long)arr[i],minp*(long long)arr[i]));
+	        minp=min(mm*(long long)arr[i],min((long long)arr[i],minp*(long long)arr[i]));
+	       
+	        ans=max(ans,maxp);
+	      
+	    }
+	    return ans;
+	}
