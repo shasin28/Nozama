@@ -1,0 +1,70 @@
+class Solution{
+  public:
+  
+    int maxArea(int M[MAX][MAX], int n, int m)
+    {
+        
+        int ans=0;
+        
+        for(int j=0;j<m;j++)
+        {
+            for(int i=1;i<n;i++)
+            {
+                if(M[i][j]!=0)
+                M[i][j]+=M[i-1][j];
+                
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+           int dp[m];
+           for(int j=0;j<m;j++)
+           dp[j]=M[i][j];
+           int left[m],right[m];
+           stack<int>s;
+           for(int k=0;k<m;k++)
+           {
+               if(s.empty())
+               {
+               left[k]=0;
+               s.push(k);
+               }
+               else
+               {
+                       while(!s.empty()&&dp[s.top()]>=dp[k])
+                       s.pop();
+                       if(s.empty())
+                       left[k]=0;
+                       else
+                       left[k]=s.top()+1;
+                       s.push(k);
+               }
+           }
+               stack<int>ss;
+                 for(int k=m-1;k>=0;k--)
+                 {
+               if(ss.empty())
+               {
+               right[k]=m-1;
+               ss.push(k);
+               }
+               else
+               {
+    while(!ss.empty()&&dp[ss.top()]>=dp[k])
+                       ss.pop();
+                       if(ss.empty())
+                       right[k]=m-1;
+                       else
+                       right[k]=ss.top()-1;
+                       ss.push(k);
+                   
+               }
+                 }
+           for(int j=0;j<m;j++)
+           ans=max(ans,(right[j]-left[j]+1)*dp[j]);
+     
+           
+        }
+        return ans;
+    }
+};
