@@ -1,0 +1,22 @@
+  int maximumPath(int N, vector<vector<int>> Matrix)
+    {
+        int dp[N][N];
+        for(int i=0;i<N;i++)
+        dp[0][i]=Matrix[0][i];
+        for(int i=1;i<N;i++)
+        {
+            for(int j=0;j<N;j++)
+            {
+                int a=j-1>=0?dp[i-1][j-1]:0;
+                int b=j+1<N?dp[i-1][j+1]:0;
+                int c=dp[i-1][j];
+                dp[i][j]=max(a,max(b,c))+Matrix[i][j];
+            }
+        }
+        int result=0;
+        for(int i=0;i<N;i++)
+        {
+            result=max(result,dp[N-1][i]);
+        }
+       return result; 
+    }
