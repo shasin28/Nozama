@@ -1,0 +1,17 @@
+  int countWays(int arr[], int m, int N) 
+    { 
+      sort(arr,arr+m);
+      int dp[N+1];
+      memset(dp,0,sizeof(dp));
+      dp[0]=1;
+      for(int i=0;i<=N;i++)
+      {
+          for(int j=0;j<m;j++)
+          {
+              if(i>=arr[j])
+              dp[i]=((dp[i]%1000000007)+(dp[i-arr[j]]%1000000007))%1000000007;
+          }
+      }
+      return dp[N];
+    } 
+    
