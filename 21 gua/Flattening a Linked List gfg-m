@@ -1,0 +1,31 @@
+Node *flatten(Node *root)
+{
+   if(!root->next)
+   return root;
+   Node *r2=flatten(root->next);
+   Node *dummy=new Node(0);
+   Node *temp=dummy;
+   while(root&&r2)
+   {
+       if(root&&r2)
+       {
+           if(root->data<=r2->data)
+           {
+               temp->bottom=root;
+               root=root->bottom;
+           }
+           else
+           {
+               temp->bottom=r2;
+               r2=r2->bottom;
+           }
+           temp=temp->bottom;
+       }
+       if(!r2&&root)
+       temp->bottom=root;
+       if(!root&&r2)
+       temp->bottom=r2;
+   }
+   return dummy->bottom;
+}
+
